@@ -166,8 +166,8 @@ function setMatrixUniforms() {
 }
 
 var lastTime = 0;
-    var rTri = 0;
-    var rSquare = 0;
+var rPyramid = 0;
+var rCube = 0;
 
 
 
@@ -214,8 +214,8 @@ function animate() {
     if (lastTime != 0) {
       var elapsed = timeNow - lastTime;
 
-      rTri += (90 * elapsed) / 1000.0;
-      rSquare += (75 * elapsed) / 1000.0;
+      rPyramid += (90 * elapsed) / 1000.0;
+      rCube += (75 * elapsed) / 1000.0;
     }
     lastTime = timeNow;
 }
