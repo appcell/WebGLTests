@@ -130,8 +130,54 @@ function degToRad(degrees) {
 var cubeVertexPositionBuffer;
 var cubeVertexColorBuffer;
 var cubeVertexIndexBuffer;
+var cubeVertexNormalBuffer;
 
 function initBuffers() {
+
+    cubeVertexNormalBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
+    var vertexNormals = [
+      // Front face
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+       0.0,  0.0,  1.0,
+
+      // Back face
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+       0.0,  0.0, -1.0,
+
+      // Top face
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+       0.0,  1.0,  0.0,
+
+      // Bottom face
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+       0.0, -1.0,  0.0,
+
+      // Right face
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+       1.0,  0.0,  0.0,
+
+      // Left face
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+      -1.0,  0.0,  0.0,
+    ];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexNormals), gl.STATIC_DRAW);
+    cubeVertexNormalBuffer.itemSize = 3;
+    cubeVertexNormalBuffer.numItems = 24;
+
+
     cubeVertexPositionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
     vertices = [
@@ -255,6 +301,9 @@ function drawScene() {
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
+    gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, cubeVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, neheTexture);
